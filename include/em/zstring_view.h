@@ -60,10 +60,10 @@ namespace em
         constexpr basic_zstring_view(const char *target) noexcept : storage(target) {}
         constexpr basic_zstring_view(const std::string &target) noexcept : storage(target) {}
 
-        struct TrustSpecifiedSize {explicit TrustSpecifiedSize() = default;};
+        struct TrustNullTerminated {explicit TrustNullTerminated() = default;};
         // An unsafe constructor that trusts the specified size.
         // The input size must not include the null-terminator.
-        explicit constexpr basic_zstring_view(TrustSpecifiedSize, std::string_view target) : storage(target) {}
+        explicit constexpr basic_zstring_view(TrustNullTerminated, std::string_view target) : storage(target) {}
 
         [[nodiscard]] constexpr operator const underlying_string_view_type &() const {return storage;}
         [[nodiscard]] constexpr const underlying_string_view_type &underlying_string_view() const {return storage;}
